@@ -9,11 +9,12 @@ export function MeetingPlaces() {
 
     const placesClient = generateClient<Schema>().models.MeetingPlace
 
+
     const [meetingPlaces, setMeetingPlaces] = useState<Array<MeetingPlaceType>>([])
 
     useEffect(() => {
         placesClient.observeQuery({
-            authMode: 'apiKey'
+            authMode: 'identityPool'
         }).subscribe({
             next: (data) => setMeetingPlaces([...data.items])
         });
@@ -23,7 +24,7 @@ export function MeetingPlaces() {
         placesClient.create({
             location: window.prompt('Place location')!
         }, {
-            authMode: 'apiKey'
+            authMode: 'identityPool'
         })
     }
 
