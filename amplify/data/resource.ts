@@ -12,7 +12,7 @@ const schema = a.schema({
       location: a.string().required(),
       rating: a.integer(),
     })
-    .authorization((allow) => [allow.guest()]),
+    .authorization((allow) => [allow.publicApiKey()]),
   Task: a
     .model(
       {description: a.string(),}
@@ -25,7 +25,7 @@ export type Schema = ClientSchema<typeof schema>;
 export const data = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: 'identityPool',
+    defaultAuthorizationMode: 'apiKey',
   },
 });
 
